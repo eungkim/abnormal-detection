@@ -19,7 +19,7 @@ class TempScaling(nn.Module):
         return out
 
 
-def input_preprocess(model, x, eps): #input_pre(model=BaseModel(), x=data)
+def input_preprocess(model, x, eps): #input_preprocess(model=YourModel(), x=yourdata, eps=eps)
     x.requires_grad = True
     #(batch, num_class)
     out = model(x)
