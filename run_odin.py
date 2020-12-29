@@ -1,6 +1,6 @@
 import torch
 from model.base_model import BasicClf
-from model.odin as odin 
+import model.odin as odin 
 
 
 temp = 100
