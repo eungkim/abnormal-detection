@@ -18,7 +18,7 @@ test_loader = torch.utils.data.DataLoader(
 
 model = odin.ODIN(
     odin.TempScaling(base_model, temp), 
-    odin.InputPreprocess(TempScaling(base_model, temp), eps), 
+    odin.InputPreprocess(odin.TempScaling(base_model, temp), eps), 
     odin.OutDetector(sigma)
 )
 
