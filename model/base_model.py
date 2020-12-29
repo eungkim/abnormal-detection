@@ -44,15 +44,15 @@ class BasicClf(nn.Module):
     def global_max_pool_2d(self, x):
         return utils.GlobalMaxPool2d(x)
         
-        #(batch, h, w)
+        #x = [batch, h, w]
     def forward(self, x):
-        #(batch, 1, h, w)
+        #x = [batch, 1, h, w]
         x = x.unsqueeze(1)
-        #(batch, 256, h, w))
+        #out = [batch, 256, h, w]
         out = self.conv(x)
-        #(batch, 256)
+        #out = [batch, 256]
         out = self.global_max_pool_2d(out)
-        #(batch, num_class)
+        #out = [batch, num_class]
         out = self.fc(out)
         return F.softmax(out, dim=1)
 
