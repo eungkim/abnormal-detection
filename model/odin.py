@@ -56,7 +56,7 @@ class OutDetector(nn.Module):
         max_softmax = torch.max(x, dim=1)
         #out = [batch]
         out = max_softmax > self.sigma 
-        return out #Boolean Tensor, True out-dist, False in-dist 
+        return out #Boolean Tensor, True in-dist, False out-dist 
 
 
 class ODIN(nn.Module):
@@ -65,12 +65,12 @@ class ODIN(nn.Module):
     input_preprocss = InputPreprocess(TempScaling(base_model, temp), eps)
     ood_detector = OutDetector(sigma)
     """
-    def __init__(self, temp_scaler, input_preprocess, ood_detector):
+    def __init__(self, base_model, temp, eps, sigma):
         super(ODIN, self).__init__()
 
-        self.temp_scaler = temp_scaler
-        self.input_preprocess = input_preprocess 
-        self.ood_detector = ood_detector
+        self.temp_scaler = TempScaling(base_model, temp)
+        self.input_preprocess = InputPreprocess(TempScaling(base_model, temp), eps)
+        self.ood_detector = OutDetector(sigma)
 
     def forward(self, x):
         x_tilda = self.input_preprocess(x) 

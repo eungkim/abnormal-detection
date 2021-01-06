@@ -16,11 +16,7 @@ test_loader = torch.utils.data.DataLoader(
     shuffle=False
 )
 
-model = odin.ODIN(
-    odin.TempScaling(base_model, temp), 
-    odin.InputPreprocess(odin.TempScaling(base_model, temp), eps), 
-    odin.OutDetector(sigma)
-)
+model = odin.ODIN(base_model, temp, eps, sigma)
 
 y_hat_total = torch.tensor([])
 y_total = torch.tensor([])
@@ -31,4 +27,6 @@ for data in test_loader:
     y_hat_total = torch.cat((y_hat_total, out), 0) 
     y_total = torch.cat((y_total, y), 0)
 
-#evaluation
+#evaluate using AUROC, AUPR, Detection Error 
+
+
