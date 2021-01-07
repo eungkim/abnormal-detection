@@ -44,7 +44,7 @@ class InputPreprocess(nn.Module):
         return x_tilde 
 
 
-#Out=of-distribution Detector part
+#Out-of-distribution Detector part
 class OutDetector(nn.Module):
     def __init__(self, sigma):
         super(OutDetector, self).__init__()

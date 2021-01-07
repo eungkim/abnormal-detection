@@ -1,11 +1,18 @@
 import torch
 from model.base_model import BasicClf
 import model.odin as odin 
+import argparse
 
 
-temp = 100
-eps = 0.4
-sigma = 0.7
+parser = argparse.ArgumentParser(description="type the arguments")
+parser.add_argument('--temp', type=float ,help="temp")
+parser.add_argument('--eps', type=float, help="eps")
+parser.add_argument('--sigma', type=float, help="sigma")
+args = parser.parse_args()
+
+temp = args.temp 
+eps = args.eps
+sigma = args.sigma
 
 # Suppose that we have a well trained classifier named "base_model"
 base_model = BasicClf()
